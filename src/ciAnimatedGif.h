@@ -16,9 +16,11 @@ class ciAnimatedGif {
     static ciAnimatedGifRef create( const cinder::fs::path &path){ return ciAnimatedGif::create( (cinder::DataSourceRef)cinder::DataSourcePath::create( path )); }
     
     void update();
-    void draw();
+    void draw(cinder::vec2 loc);
     void play();
     void seek( float pct );
+
+    uint16_t                        canvasWidth, canvasHeight;
     
     const std::vector<ci::Color> getPalette(){ return mColorList; };
     
@@ -37,8 +39,7 @@ class ciAnimatedGif {
     ci::gl::TextureRef              mCurTex = nullptr;
     
     std::string                     mHeader;
-    
-    uint16_t                        canvasWidth, canvasHeight;
+
     bool                            hasGlobalColorTable = false;
     std::vector<ci::Color>          mColorList;
 };

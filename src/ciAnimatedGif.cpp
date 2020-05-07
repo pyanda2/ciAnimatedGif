@@ -13,11 +13,13 @@ ciAnimatedGif::ciAnimatedGif(ci::DataSourceRef data)
     
     ImageSourceRef img = loadImage( data, options );
     int numFrames = img->getCount();
-    
+
+
     for( int i = 0; i < numFrames; ++i ) {
         SurfaceRef frame = Surface::create( loadImage(data, options) );
         mFrameList.push_back( gl::Texture::create(*frame) );
         options.index( options.getIndex() + 1 );
+
     }
     
     mCurFrame = 0;
@@ -111,10 +113,10 @@ void ciAnimatedGif::update()
     mCurTex = mFrameList[mCurFrame];
 }
 
-void ciAnimatedGif::draw()
+void ciAnimatedGif::draw(cinder::vec2 loc)
 {
     update();
 
-    gl::draw(mCurTex);
+    gl::draw(mCurTex, loc);
     
 }
